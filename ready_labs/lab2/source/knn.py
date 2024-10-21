@@ -1,7 +1,4 @@
 import numpy as np 
-
-
-
 class KNN:
     def __init__(self, k:int, x_train,y_train ):
         self.k = k
