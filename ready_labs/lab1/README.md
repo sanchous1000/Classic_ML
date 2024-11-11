@@ -21,7 +21,7 @@
 
 Каждый метод кластеризации был протестирован и сравнён с эталонным решением. Ниже представлено сравнение метрик:
 
-![Результаты кластеризации](image.png)
+![Результаты кластеризации](images/image.png)
 
 ### 2. Результаты PCA для 2 датасетов
 
@@ -29,7 +29,7 @@
 
 | LIVE | Beverage |
 |------|----------|
-| ![PCA для датасета LIVE](pca_live.png) | ![PCA для датасета Beverage](pca_beverage.png) |
+| ![PCA для датасета LIVE](images/pca_live.png) | ![PCA для датасета Beverage](images/pca_beverage.png) |
 
 ### 3. Сравнение дендрограмм
 
@@ -39,13 +39,13 @@
 
 | Собственная реализация | Эталонная реализация |
 |------------------------|----------------------|
-| ![Дендрограмма для собственной реализации датасета LIVE](dendrogram_custom_live.png) | ![Дендрограмма для эталонной реализации датасета LIVE](dendrogram_reference_live.png) |
+| ![Дендрограмма для собственной реализации датасета LIVE](images/dendrogram_custom_live.png) | ![Дендрограмма для эталонной реализации датасета LIVE](images/dendrogram_reference_live.png) |
 
 **Beverage**
 
 | Собственная реализация | Эталонная реализация |
 |------------------------|----------------------|
-| ![Дендрограмма для собственной реализации датасета Beverage](dendrogram_custom_Beverage.png) | ![Дендрограмма для эталонной реализации датасета Beverage](dendrogram_reference_Beverage.png) |
+| ![Дендрограмма для собственной реализации датасета Beverage](images/dendrogram_custom_Beverage.png) | ![Дендрограмма для эталонной реализации датасета Beverage](images/dendrogram_reference_Beverage.png) |
 
 ## Заключение
 
