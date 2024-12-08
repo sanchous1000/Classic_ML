@@ -4,16 +4,11 @@ class KNN:
         self.k = k
         self.x_train = np.array(x_train)
         self.y_train = np.array(y_train)
-
-
     def predict(self, x_test):
         x_test = np.array(x_test)
         if len(x_test.shape) == 1:
             x_test = x_test.reshape(1, -1)
-        distances = np.sqrt(np.sum(x_test**2, axis=1).reshape(-1,1) + \
-                                np.sum(self.x_train**2, axis=1).reshape(1,-1)- \
-                                    2*np.dot(x_test,self.x_train.T))
-       
+        distances = np.sqrt(np.sum(x_test**2, axis=1).reshape(-1,1) + np.sum(self.x_train**2, axis=1).reshape(1,-1)- 2*np.dot(x_test,self.x_train.T))
         sorted_distances_idx = np.argsort(distances, axis=1)[:,:self.k+1]
         min_dist_points = distances[np.arange(distances.shape[0])[:,None], sorted_distances_idx[:,:self.k]]
         k_max_neib = distances[np.arange(distances.shape[0])[:,None], sorted_distances_idx[:, -1].reshape(distances.shape[0], 1)]
@@ -24,7 +19,6 @@ class KNN:
         for idx, cls in enumerate(classes):
             cls_mask = (labels == cls)
             weighted_votes[:, idx] = np.sum(kernel_weights * cls_mask, axis=1)
-        
         return classes[np.argmax(weighted_votes, axis=1)]
    
 def LOO(X, y, k_neib):
