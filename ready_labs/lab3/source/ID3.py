@@ -55,7 +55,6 @@ class ID3:
             if len(np.unique(y_train)) == 1 or self.depth_left >= self.max_depth or self.depth_right >= self.max_depth:
                 return {'Тип развилки': 'leaf',  'value': np.mean(y_train) }
         
-
         criterion_split, tr, feature = self.splitter(X_train, y_train)
         X = X_train[:, feature]
         not_nones = ~np.isnan(X) #обработка пропусков, тут не None
@@ -143,23 +142,16 @@ class ID3:
     def pruning(self, X, y, tree=False):
         if tree is False:
             tree = self.dec_tree
-
         if tree['Тип развилки'] == 'leaf':
             return tree
-
-       
         data = X[:, tree['feature']]
         left_mask = (data <= tree['threshold']) | np.isnan(data)
         right_mask = ~left_mask
-
-
         tree['left'] = self.pruning(X[left_mask], y[left_mask], tree['left'])
         tree['right'] = self.pruning(X[right_mask], y[right_mask], tree['right'])
-
         if len(y) == 0:
             return {'Тип развилки': 'leaf', 'value': 0}
            
-
         if self.ID3_type == 'classification':
             classes, counts = np.unique(y, return_counts=True)
             mc = classes[counts.argmax()]
@@ -187,42 +179,3 @@ class ID3:
             return tree['right']
 
 
-
-
-
-    '''def pruning(self, X, y, tree = False):
-        if tree is False:
-            tree = self.dec_tree
-        if tree['Тип развилки'] == 'leaf':
-            return tree
-        data = X[:, tree['feature']]
-        left = data <= tree['threshold']
-        right =  data > tree['threshold']
-        if len(y[left]) == 0 or len(y[right]) == 0:
-            tree['left'] = self.pruning(X[left], y[left], tree['left'])
-            tree['right'] = self.pruning(X[right], y[right], tree['right'])
-        if self.ID3_type == 'classification':
-            classes, counts = np.unique(y, return_counts=True)
-            mc = classes[counts.argmax()]  
-            r_v = np.sum(self.predict(X, tree_=tree) != y)        
-            rL_v = np.sum(self.predict(X[left], tree_=tree['left']) != y[left])
-            rR_v = np.sum(self.predict(X[right],tree_=tree['right']) != y[right])
-            rc_v = np.sum(mc != y)  
-        else: 
-            mc = np.mean(y)
-            r_v = np.sum((self.predict(X) - y) ** 2) 
-            rL_v = np.sum((self.predict(X[left]) - y[left]) ** 2)
-            rR_v = np.sum((self.predict(X[right]) - y[right]) ** 2)
-            rc_v = np.sum((mc - y) ** 2)
-        print([rc_v, r_v, rL_v, rR_v])
-        minimal = np.argmin([rc_v, r_v, rL_v, rR_v])
-        print(minimal)
-        if minimal == 0:
-            return {'Тип развилки': 'leaf', 'value': mc }
-        elif minimal == 1:
-            return tree
-        elif minimal == 2:
-            return tree['left']
-        elif minimal == 3:
-            return tree['right']
-'''
